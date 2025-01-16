@@ -9,13 +9,13 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions (features ="src/main/java/Features/Tags.feature" ,
 			glue= {"TagsStepDefinition"}, //the path of the step definition files
 			plugin = {"pretty"}, //"html:target/cucumber-reports.html", "json:json_output/cucumber.json", "junit:junit_xml/cucmber.xml"},
-			monochrome = true,
+			monochrome = false,
 			stepNotifications = true,
 			publish = true,
-			dryRun = true,
+			dryRun = false
 			//tags = ("@SmokeTest or @RegressionTest")
 			//tags = ("@SmokeTest and @RegressionTest")
-			 tags = ("@EndToEndTest")
+			// tags = ("@EndToEndTest")
 )
 public class TestRunner {
 }

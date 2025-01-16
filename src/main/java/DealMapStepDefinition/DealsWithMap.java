@@ -73,20 +73,34 @@ public class DealsWithMap {
 
 	@Then("^user enters deal details$")
 	public void Then_user_enters_deal_details(DataTable data) {
-		
-		for(List<Map<String, String>> dealdata = data.asMaps(String.class, String.class))
-		{
-			driver.findElement(By.id("//input[@autocomplete='new-password' and @name='title']")).sendKeys(dealdata.get("title"));
-			driver.findElement(By.xpath("//div[@name='company']")).sendKeys(dealdata.get("company"));
-			driver.findElement(By.xpath("//div[@name='products']")).sendKeys(dealdata.get("products"));
-			
-			driver.findElement(By.xpath("//button[text()='Save']")).click();
-			
-			//move to new deals page
-			Actions action = new Actions(driver);
-			action.moveToElement(driver.findElement(By.xpath("//span[text()='Deals']"))).click();
-		}
-		}
+
+	    List<Map<String, String>> dealdata = data.asMaps(String.class, String.class);
+
+	    for (Map<String, String> deal : dealdata) {
+	        driver.findElement(By.xpath("//input[@autocomplete='new-password' and @name='title']")).sendKeys(deal.get("title"));
+	        driver.findElement(By.xpath("//div[@name='company']")).sendKeys(deal.get("company"));
+	        driver.findElement(By.xpath("//div[@name='products']")).sendKeys(deal.get("products"));
+
+	        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+	        //move to new deals page
+	        Actions action = new Actions(driver);
+	        action.moveToElement(driver.findElement(By.xpath("//span[text()='Deals']"))).click().perform();
+	    }
+	}
+	
+/*public void Then_user_enters_deal_details(DataTable data) { 
+	for(List<Map<String, String>> dealdata = data.asMaps(String.class, String.class)) 
+	{ 
+		driver.findElement(By.id("//input[@autocomplete='new-password' and @name='title']")).sendKeys(dealdata.get("title"));
+		driver.findElement(By.xpath("//div[@name='company']")).sendKeys(dealdata.get("company")); 
+		driver.findElement(By.xpath("//div[@name='products']")).sendKeys(dealdata.get("products")); 
+		driver.findElement(By.xpath("//button[text()='Save']")).click(); 
+		//move to new deals page A
+		ctions action = new Actions(driver); 
+		action.moveToElement(driver.findElement(By.xpath("//span[text()='Deals']"))).click(); 
+		} 
+	}*/
 
 	@And("^close the browser$")
 	public void close_the_browser() {
